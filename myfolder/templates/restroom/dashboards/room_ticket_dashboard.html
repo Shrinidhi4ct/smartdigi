@@ -1,0 +1,31 @@
+<!-- templates/restroom/dashboards/room_tickt_dashbaord.html -->
+{% extends '../../base.html' %}
+{% block title %} Dashboard {% endblock title %}
+{% block content %}{% load split %}
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-6">
+            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                <h4 class="mb-sm-0">{{room_name}} - Tickets Dashboard</h4>
+            </div>
+        </div>
+        
+    </div>
+    <!-- end page title -->
+
+    <div class="row project-wrapper">
+        {% include 'includes/tickets_summary.html' %}
+    </div>
+    <!-- end row -->
+    <div class="row project-wrapper">
+        {% include 'includes/tickets_container.html '%}
+        <!-- includes/check_list -->
+        {% include 'includes/check_list_container.html' %}
+    </div>
+    <!-- end row -->
+</div>
+<!-- end row -->
+</div>
+<!-- container-fluid -->
+{% endblock %}

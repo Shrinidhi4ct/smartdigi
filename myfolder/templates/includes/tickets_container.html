@@ -1,0 +1,45 @@
+{% load split %}
+<div class="col-xl-6">
+    <div class="card">
+        <div class="card-header align-items-center d-flex">
+            <h4 class="card-title mb-0 flex-grow-1">Current Ticket Queue</h4>
+        </div>
+        <div class="card-body">
+           <div class="live-preview">
+                <div class="table-responsive">
+                    <table class="table align-middle table-nowrap mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col">Reason</th>
+                                <th scope="col">Room</th>
+                                <th scope="col">Created at</th>
+                                <!-- <th scope="col">Action</th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if tickets %}
+                                {% for ticket in tickets %}
+                                <tr>
+                                    <td>
+                                        {% for r in ticket.reason|split:":" %}
+                                            {{ r }}<br/>
+                                        {% endfor %}
+                                    </td>
+                                    <td>{{ ticket.room }}</td>
+                                    <td>{{ ticket.created_at }}</td>
+                                </tr>
+                                {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td colspan="5">No data found</td>
+                            </tr>
+                            {% endif %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div><!-- end card-body -->
+    </div><!-- end card -->
+</div><!-- end col -->

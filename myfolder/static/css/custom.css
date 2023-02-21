@@ -1,0 +1,79 @@
+/* [data-layout=horizontal] .page-content {
+    padding:10px !important
+} */
+
+body {
+    overflow-y: hidden;
+}
+
+.feedback_container{
+    height:100%;
+    max-height: 800px;
+    overflow:auto;
+}
+
+.tickets_container{
+    height:100%;
+    max-height: 500px;
+    overflow:auto;
+}
+
+[data-topbar=dark] #page-topbar{
+    background-color: #ffffff !important;
+    border-color: #ffffff !important;
+}
+
+.card-header{
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #878a9e;
+}
+
+.feedback{
+    display:none;
+}
+.navbar-header{
+    height: 120px;
+}
+
+.avatar-sm {
+    height: 8rem;
+    width: 8rem;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: .25rem;
+}
+::-webkit-scrollbar-thumb {
+    background-color: rgba(27, 27, 27, .4);
+    border-radius: 3px;
+}
+::-webkit-scrollbar-track{
+    background: transparent;
+}
+
+@media screen and (max-width: 768px) {
+    .col-xxl-12{
+        margin-top:12%;
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    .col-xxl-12{
+        margin-top:12%;
+    }
+  }
+
+  @media screen and (max-width: 920px) {
+    .col-xxl-12{
+        margin-top:12%;
+    }
+  }
+
+@media screen and (min-width:144px){
+    .col-xxl-12{
+        margin-top:6%;
+    }
+}

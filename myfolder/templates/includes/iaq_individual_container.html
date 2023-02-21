@@ -1,0 +1,146 @@
+<div class="col-xxl-12">
+    {% for room in iaq_data %}
+    <div class="row">
+        <!-- end col -->
+        {% if room.aqi != None %}
+        <div class="col-xl-2">
+            <div class="card card-animate">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="avatar-sm flex-shrink-0">
+                            <span class="avatar-title bg-soft-primary text-primary rounded-2 fs-2">
+                                <i data-feather="thermometer" class="text-primary"></i>
+                            </span>
+                        </div>
+                        <div class="flex-grow-1 overflow-hidden ms-3">
+                            <p class="text-uppercase fw-medium text-muted text-truncate mb-3">
+                                Temp (°C)</p>
+                            <div class="d-flex align-items-center mb-3">
+                                <h4 class="fs-4 flex-grow-1 mb-0">
+                                    {% if room.aqi.Temp >= threshold.TEMP_ABOVE or room.aqi.Temp <= threshold.TEMP_BELOW%}
+                                    <span class="counter-value text-danger">{{ room.aqi.Temp }}</span>
+                                        {% else %}
+                                    <span class="counter-value text-success">{{ room.aqi.Temp }}</span>
+                                    {% endif %}
+                                </h4>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end card body -->
+            </div>
+        </div>
+        <!-- end col -->
+        <div class="col-xl-2">
+            <div class="card card-animate">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="avatar-sm flex-shrink-0">
+                            <span class="avatar-title bg-soft-primary text-info rounded-2 fs-2">
+                                <i data-feather="droplet" class="text-info"></i>
+                            </span>
+                        </div>
+                        <div class="flex-grow-1 overflow-hidden ms-3">
+                            <p class="text-uppercase fw-medium text-muted text-truncate mb-3">
+                                Humidity (%)</p>
+                            <div class="d-flex align-items-center mb-3">
+                                <h4 class="fs-4 flex-grow-1 mb-0">
+                                    {% if room.aqi.Hum >= threshold.HUM_ABOVE or room.aqi.Hum <= threshold.HUM_BELOW %}
+                                        <span class="counter-value text-danger">{{ room.aqi.Hum }}</span>
+                                        {% else %}
+                                        <span class="counter-value text-success">{{ room.aqi.Hum }}</span>
+                                        {% endif %}
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end card body -->
+            </div>
+        </div>
+        <!-- end col -->
+
+        <div class="col-xl-2">
+            <div class="card card-animate">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="avatar-sm flex-shrink-0">
+                            <span class="avatar-title bg-soft-primary text-info rounded-2 fs-2">
+                                <i data-feather="cloud-rain" class="text-info"></i>
+                            </span>
+                        </div>
+                        <div class="flex-grow-1 overflow-hidden ms-3">
+                            <p class="text-uppercase fw-medium text-muted text-truncate mb-3">
+                                CO2 (PPM)</p>
+                            <div class="d-flex align-items-center mb-3">
+                                <h4 class="fs-4 flex-grow-1 mb-0">
+                                    {% if room.aqi.CO2 >= threshold.CO2_ABOVE or room.aqi.CO2 <= threshold.CO2_BELOW %}
+                                        <span class="counter-value text-danger">{{ room.aqi.CO2 }}</span>
+                                        {% else %}
+                                        <span class="counter-value text-success">{{ room.aqi.CO2 }}</span>
+                                        {% endif %}
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-2">
+            <div class="card card-animate">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="avatar-sm flex-shrink-0">
+                            <span class="avatar-title bg-soft-primary text-info rounded-2 fs-2">
+                                <i data-feather="wind" class="text-info"></i>
+                            </span>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <p class="text-uppercase fw-medium text-muted mb-3">Ammonia</p>
+                            <div class="d-flex align-items-center mb-3">
+                                <h4 class="fs-4 flex-grow-1 mb-0">
+                                    {% if room.aqi.Ammonia >= threshold.Ammonia_ABOVE or room.aqi.Ammonia <= threshold.Ammonia_BELOW %} 
+                                        <span class="counter-value text-danger">{{ room.aqi.Ammonia }}</span>
+                                    {% else %}
+                                        <span class="counter-value text-success">{{ room.aqi.Ammonia }}</span>
+                                    {% endif %}
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-2">
+            <div class="card card-animate">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="avatar-sm flex-shrink-0">
+                            <span class="avatar-title bg-soft-primary text-info rounded-2 fs-2">
+                                <i data-feather="loader" class="text-info"></i>
+                            </span>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <p class="text-uppercase fw-medium text-muted mb-3">TVOC (ppb)</p>
+                            <div class="d-flex align-items-center mb-3">
+                                <h4 class="fs-4 flex-grow-1 mb-0">
+                                    {% if room.aqi.TVOC >= threshold.TVOC_ABOVE or room.aqi.TVOC <= threshold.TVOC_BELOW %}
+                                        <span class="counter-value text-danger">{{ room.aqi.TVOC }}</span>
+                                    {% else %}
+                                        <span class="counter-value text-success">{{ room.aqi.TVOC }}</span>
+                                    {% endif %}
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       {% endif %}
+    </div>
+    <!-- end row -->
+    {% endfor %}
+</div>

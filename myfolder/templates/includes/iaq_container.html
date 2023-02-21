@@ -1,0 +1,80 @@
+<div class="col-xxl-8">
+    <div class="row">
+        <!-- end col -->
+        {% for room in iaq_data %}
+        <div class="col-xl-4">
+            <div class="card card-animate">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <!-- <div class="avatar-sm flex-shrink-0">
+                            <span class="avatar-title bg-soft-primary text-primary rounded-2 fs-2">
+                                <i data-feather="smile" class="text-primary"></i>
+                            </span>
+                        </div> -->
+                        <div class="flex-grow-1 overflow-hidden ms-3">
+                            <p class="text-uppercase text-truncate mb-3">{{room.room}}</p>
+                            <p class="text-muted fw-medium">Lasted updated at: {{ room.created_at }}</p>
+                            <div class="d-flex align-items-center mb-3">
+                                {% if room.aqi != None %}
+                                <table class="table">
+                                    <!-- Temperature -->
+                                    <tr>
+                                        <td>Temperature (°C)</td>
+                                        {% if room.aqi.Temp >= threshold.TEMP_ABOVE or room.aqi.Temp <= threshold.TEMP_BELOW %}
+                                        <td class="text-danger">{{ room.aqi.Temp }}</td>
+                                        {% else %}
+                                        <td class="text-success">{{ room.aqi.Temp }}</td>
+                                        {% endif %}
+                                    </tr>
+                                    <!-- Humidity -->
+                                    <tr>
+                                        <td>Humidity (%)</td>
+                                        {% if room.aqi.Hum >= threshold.HUM_ABOVE or room.aqi.Hum <= threshold.HUM_BELOW %}
+                                        <td class="text-danger">{{ room.aqi.Hum }}</td>
+                                        {% else %}
+                                        <td class="text-success">{{ room.aqi.Hum }}</td>
+                                        {% endif %}
+                                    </tr>
+                                    <!-- CO2 -->
+                                    <tr>
+                                        <td>CO2 (ppm)</td>
+                                        {% if room.aqi.CO2 >= threshold.CO2_ABOVE or room.aqi.CO2 <= threshold.CO2_BELOW %}
+                                        <td class="text-danger">{{ room.aqi.CO2 }}</td>
+                                        {% else %}
+                                        <td class="text-success">{{ room.aqi.CO2 }}</td>
+                                        {% endif %}
+                                    </tr>
+                                    <!-- Ammonia -->
+                                    <tr>
+                                        <td>Ammonia (ppm)</td>
+                                        {% if room.aqi.Ammonia >= threshold.Ammonia_ABOVE or room.aqi.Ammonia <= threshold.Ammonia_BELOW %}
+                                        <td class="text-danger">{{ room.aqi.Ammonia }}</td>
+                                        {% else %}
+                                        <td class="text-success">{{ room.aqi.Ammonia }}</td>
+                                        {% endif %}
+                                    </tr>
+                                    <!-- TVOC -->
+                                    <tr>
+                                        <td>TVOC (ppb)</td>
+                                        {% if room.aqi.TVOC >= threshold.TVOC_ABOVE or room.aqi.TVOC <= threshold.TVOC_BELOW %}
+                                        <td class="text-danger">{{ room.aqi.TVOC }}</td>
+                                        {% else %}
+                                        <td class="text-success">{{ room.aqi.TVOC }}</td>
+                                        {% endif %}
+                                    </tr>
+                                </table>
+                                {% else %}
+                                <p class="text-muted">No IAQ data</p>
+                                {% endif %}
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end card body -->
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <!-- end row -->
+</div>

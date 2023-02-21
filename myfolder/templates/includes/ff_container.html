@@ -1,0 +1,44 @@
+<div class="col-xxl-8">
+    <div class="row">
+        <!-- end col -->
+        {% for room in ff_data %}
+        <div class="col-xl-4">
+            <div class="card card-animate">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <!-- <div class="avatar-sm flex-shrink-0">
+                            <span class="avatar-title bg-soft-primary text-primary rounded-2 fs-2">
+                                <i data-feather="smile" class="text-primary"></i>
+                            </span>
+                        </div> -->
+                        <div class="flex-grow-1 overflow-hidden ms-3">
+                            <p class="text-uppercase text-truncate mb-3">{{room.room}}</p>
+                            <div class="d-flex align-items-center mb-3">
+                                {% if room.in != None %}
+                                <table class="table">
+                                    <!-- IN -->
+                                    <tr>
+                                        <td>IN</td>
+                                        <td class="text-success">{{ room.in }}</td>
+                                    </tr>
+                                    <!-- OUT -->
+                                    <tr>
+                                        <td>OUT</td>
+                                        <td class="text-success">{{ room.out }}</td>
+                                    </tr>
+                                </table>
+                                {% else %}
+                                <p class="text-muted">No FF data</p>
+                                {% endif %}
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end card body -->
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <!-- end row -->
+</div>

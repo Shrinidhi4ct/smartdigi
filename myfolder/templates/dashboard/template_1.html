@@ -1,0 +1,218 @@
+<!-- templates/dashboard/template.html -->
+{% load static %}
+<!doctype html>
+<html lang="en" data-layout="horizontal" data-topbar="dark" data-sidebar-size="lg">
+
+<head>
+    <meta charset="utf-8" />
+    <title>{% block title%} {%endblock title%} | Building Monitoring System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Restroom management system" name="description" />
+    <meta content="dinesh.kumar" name="author" />
+    <!-- favicon -->
+    <link rel="shortcut icon" href="#">
+    <!-- Bootstrap Css -->
+    <link href="{%static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="{%static 'css/app.min.css' %}" rel="stylesheet" type="text/css" />
+    <!-- Template css -->
+    <link href="{%static 'dashboard/template.css' %}" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+    <div id="slider" class="carousel slide" data-ride="carousel" data-interval="5000">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="{%static 'image/save-tree.jpg' %}" class="d-block w-100 h-100" alt="Slide 1">
+          </div>
+          <div class="carousel-item">
+            <img src="{%static 'image/water.jpg' %}" class="d-block w-100 h-100" alt="Slide 2">
+          </div>
+        </div>
+    </div>
+
+
+    <div class="container-fluid main-body">
+        <header class="d-flex flex-wrap justify-content-center py-3">
+          <a href="{% url 'dashboard' %}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+            <img src="{%static 'image/user_logo.svg' %}" alt="" height="65">
+          </a>
+    
+          <ul class="nav nav-pills">
+            <li class="nav-item"><h3 id="clock" style="color:#878a99!important; padding:0 80px 0 0;">00:00:00 AM</h3></li>
+          </ul>
+        </header>
+    </div>
+   
+    <div class="container-fluid main-body">
+        <div class="row">
+            <div class="col-lg-10 col-sm-10 feedback_container">
+                <div class="card">
+                    <div class="card-header text-center">
+                        Give us your feedback! 
+                      </div>
+                    <div class="card-body">
+                        {% if ratings %}
+                        <div class="row">
+                            <div class="col-lg-6 col-sm-6 add_positive card-pointer">
+                                <div class="card card-body text-center">
+                                    <img src="/{{ ratings.positive_image }}" class="img-fluid">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 add_negative card-pointer">
+                                <div class="card card-body text-center">
+                                    <img src="/{{ ratings.negative_image }}" class="img-fluid">
+                                </div>
+                            </div>
+                            
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-10 negative_feedback_container">
+                <div class="card">
+                    <div class="card-header text-center">
+                        Raise your tickets here!
+                        <!-- <button type="submit" data-bs-toggle="modal" data-bs-target="#negative_confirmation"  -->
+                            <!-- class="btn btn-primary btn-sm float-end">Raise Ticket</button> -->
+                      </div>
+                    <form class="" method="POST" id="feedback_form" name="feedback_form">
+                        {% csrf_token %}
+                        <div class="card-body">
+                            {% if reasons %}
+                            <div class="row">
+                                {% for reason in reasons %}
+                                <div class="col-lg-3 col-sm-3 reasons card-pointer" data-bs-toggle="modal"
+                                 data-bs-target="#negative_confirmation" data-reason="{{reason.id}}">
+                                    <div class="card card-body text-center">
+                                        <input type="checkbox" class="form-check-input" name="{{reason.id}}" id="{{reason.id}}">
+                                        <img src="/{{ reason.display_image }}" class="img-fluid">
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-sm-2 iaq-containter">
+                {% include 'includes/user_iaq_container.html' %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Succss modal -->
+    <div class="modal fade" id="add_positive" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    Thankyou for your feedback!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Negative modal -->
+    <div class="modal fade" id="negative_confirmation" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    Are you sure you want to raise a ticket?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger reload" data-bs-dismiss="modal">No</button>
+                    <button type="button" class="btn btn-success" id="submit_confirmation">Yes</button>
+                </div>
+            </div>
+        </div>  
+    </div>
+
+    <!-- Message PopUp-->
+    {% if messages %}
+    <div class="modal fade" id="message" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    {% for message in messages %}
+
+                    {{ message }}
+
+                    {% endfor %}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+    {% endif %}
+
+    <!-- Jquery -->
+    <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <!-- Clock JS -->
+    <script src="{% static 'js/clock.js' %}"></script>
+    <!-- App js -->
+    <script src="{% static 'js/user_dashboard.js' %}"></script>
+    <script src="{% static 'js/feather.min.js' %}"></script>
+    <script>feather.replace();</script>
+    <script>
+        // Adding positive feedback
+        $(".add_positive").click(function () {
+            $.get("{% url 'positive' room.id %}", function (data, status) {
+                
+                // Open modal and close it after 5 second
+                $("#add_positive").modal('show');
+                setTimeout(function () {
+                    location.reload();
+                }, 3000);
+            });
+        });
+        // Submitting negative feedback
+        $("#submit_confirmation").click(function () {
+            // submit form
+            $("#feedback_form").submit();
+        });
+
+        // onpage load
+        $(document).ready(function () {
+            // show message popup and hide it after 5 second
+            $("#message").modal('show');
+            setTimeout(function () {
+                $("#message").modal('hide');
+            }, 5000);
+
+            // auto scroll slider
+            $("#slider").carousel({interval: 5000});
+
+            // Reload page if no activity for 3 min
+            setTimeout(function () {
+                location.reload();
+            }, 180000);
+        });
+
+        // Load content
+        $(".carousel-inner").click(function (){
+            // Hide slider
+            $("#slider").css('display', 'none');
+            // Show content
+            $(".main-body").css('display', 'block');
+        })
+
+    </script>
+    
+</body>
+
+</html>

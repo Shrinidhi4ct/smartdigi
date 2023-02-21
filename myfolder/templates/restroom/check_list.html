@@ -1,0 +1,103 @@
+<!-- templates/reasons/reason_list.html -->
+{% extends '../base.html' %} {% load static %}
+{% block title %} Check List {% endblock title %}
+{% block content %}
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                <h4 class="mb-sm-0">Check List</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+
+    <div class="row project-wrapper">
+        <div class="col-xl-12">
+            <div class="card">
+                <div class="card-header align-items-center d-flex">
+                    <h4 class="card-title mb-0 flex-grow-1"></h4>
+                    <div class="flex-shrink-0">
+                        <a href="{% url 'check_list_create'%}" class="btn btn-primary btn-sm">Add New</a>
+                    </div>
+                </div><!-- end card header -->
+
+                <div class="card-body">
+                   <div class="live-preview">
+                        <div class="table-responsive">
+                            <table class="table align-middle table-nowrap mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Display Text</th>
+                                        <th scope="col">Display Image</th>
+                                        <th scope="col">Active Status</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% if checklist %}
+
+                                    {% for c in checklist %}
+                                    <tr>
+                                        <td>{{ c.name }}</td>
+                                        <td>{{ c.display_text }}</td>
+                                        <td>
+                                            <img src="../../{{c.display_image}}" alt="" height="50">
+                                        </td>
+                                        <td>{{ c.is_active }}</td>
+                                        <td>
+                                            <a href="{% url 'check_list_update' c.id %}" class="btn btn-primary btn-sm">Edit</a>
+                                            <a id="{{c.id}}" data-item="check_list" data-bs-toggle="modal" data-bs-target="#delete_confirmation"
+                                                class="btn btn-danger btn-sm delete_btn">Delete</a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    {% else %}
+                                    <tr>
+                                        <td colspan="5">No data found</td>
+                                    </tr>
+                                    {% endif %}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div><!-- end card-body -->
+            </div><!-- end card -->
+        </div><!-- end col -->
+    </div>
+    <!-- end row -->
+</div>
+
+<div class="modal fade" id="delete_confirmation" data-bs-backdrop="static" 
+        data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Confirm</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure want to delete the check list item?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                <a class="btn btn-success" id="confirmation">Yes</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- container-fluid -->
+{% endblock %}
+{% block scripts %}
+<script>
+    $(".delete_btn").click(function(){
+        var id = $(this).attr('id');
+        $("#confirmation").attr('href', id+"/delete");
+    });
+</script>
+{% endblock %}

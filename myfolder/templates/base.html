@@ -1,0 +1,218 @@
+<!-- templates/base.html -->
+{% load static %}
+<!doctype html>
+<html lang="en" data-layout="horizontal" data-topbar="dark" data-sidebar-size="lg">
+
+<head>
+    <meta charset="utf-8" />
+    <title>{% block title%} {%endblock title%} | Building Monitoring System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Restroom management system" name="description" />
+    <meta content="dinesh.kumar" name="author" />
+    <!-- favicon -->
+    <link rel="shortcut icon" href="#">
+    <!-- Bootstrap Css -->
+    <link href="{%static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="{%static 'css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="{%static 'css/app.min.css' %}" rel="stylesheet" type="text/css" />
+    <style>
+        [data-topbar=dark] #page-topbar {
+            background: #fff;
+        }
+    </style>
+    <!-- Add your Styles here -->
+    {% block styles%} {% endblock styles%}
+</head>
+
+<body>
+    <div id="layout-wrapper">
+        <header id="page-topbar">
+            <div class="layout-width">
+                <div class="navbar-header">
+                    <div class="d-flex">
+                        <!-- LOGO -->
+                        <div class="navbar-brand-box horizontal-logo">
+                            <a href="#" class="logo logo-light">
+                                <span class="logo-lg">
+                                    <img src="{%static 'image/logo_big.png' %}" alt="" height="100">
+                                </span>
+                            </a>
+                        </div>
+
+                        <button type="button"
+                            class="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger"
+                            id="topnav-hamburger-icon">
+                            <span class="hamburger-icon">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </span>
+                        </button>
+
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <a href="{% url 'logout'%}" class="btn btn-danger">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- ========== Mobile Menu ========== -->
+        <div class="app-menu navbar-menu">
+            <!-- LOGO -->
+            <div class="navbar-brand-box">
+                <a href="#" class="logo logo-light">
+                    <span class="logo-lg">
+                        <img src="{%static 'images/logo.png' %}" alt="" height="65">
+                    </span>
+                </a>
+                <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover"
+                    id="vertical-hover">
+                    <i class="ri-record-circle-line"></i>
+                </button>
+            </div>
+
+            <div id="scrollbar">
+                <div class="container-fluid">
+                    <ul class="navbar-nav" id="navbar-nav">
+                        <li class="menu-title"><span data-key="t-menu">Menu</span></li>
+                        <li class="nav-item">
+                            <a class="nav-link menu-link" href="#dashboard" data-bs-toggle="collapse" role="button"
+                                aria-expanded="false" aria-controls="sidebarApps">
+                                <i class="bx bxs-dashboard"></i> <span>Dashboard</span>
+                            </a>
+                            <div class="collapse menu-dropdown" id="dashboard">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a href="{% url 'dashboard' %}" class="nav-link"> Tickets Dashboard </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{% url 'iaq_dashboard' %}" class="nav-link"> IAQ/FF Dashboard </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link menu-link" href="#settings" data-bs-toggle="collapse" role="button"
+                                aria-expanded="false" aria-controls="sidebarApps">
+                                <i class="bx bx-cog"></i> <span>Settings</span>
+                            </a>
+                            <div class="collapse menu-dropdown" id="settings">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a href="{% url 'floor_list' %}" class="nav-link"> Floors </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{% url 'room_list' %}" class="nav-link"> Rooms </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{% url 'reason_list' %}" class="nav-link"> Reasons</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{% url 'check_list' %}" class="nav-link"> Check List </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{% url 'rating_list' %}" class="nav-link"> Rating </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{% url 'mqtt_list' %}" class="nav-link"> MQTT Server </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{% url 'alerts' %}" class="nav-link"> Alerts </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{% url 'user_list' %}" class="nav-link"> User </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link menu-link" href="{% url 'reports' %}">
+                                <i class="bx bx-task"></i> <span>Report</span>
+                            </a>
+                        </li>
+                        <!-- washroom -->
+                        <li class="nav-item">
+                            <a class="nav-link menu-link" href="#room_ticket_dashboard" data-bs-toggle="collapse"
+                                role="button" aria-expanded="false" aria-controls="sidebarApps">
+                                <i class="bx bxs-dashboard"></i> <span>Room Tickets dashboad</span>
+                            </a>
+                            <div class="collapse menu-dropdown" id="room_ticket_dashboard">
+                                <ul class="nav nav-sm flex-column">
+                                    {% for room in room_list %}
+                                    <li class="nav-item">
+                                        <a href="{% url 'room_dashboard' room.id %}" class="nav-link"> {{ room.name }}
+                                        </a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </li>
+                        <!-- Room IAQ Dashboard -->
+                        <li class="nav-item">
+                            <a class="nav-link menu-link" href="#room_iaq_dashboard" data-bs-toggle="collapse"
+                                role="button" aria-expanded="false" aria-controls="sidebarApps">
+                                <i class="bx bxs-dashboard"></i> <span>Room IAQ/FF dashboad</span>
+                            </a>
+                            <div class="collapse menu-dropdown" id="room_iaq_dashboard">
+                                <ul class="nav nav-sm flex-column">
+                                    {% for room in room_list %}
+                                    <li class="nav-item">
+                                        <a href="{% url 'room_iaq_dashboard' room.id %}" class="nav-link"> {{ room.name }}
+                                        </a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content">
+            <div class="page-content">
+                {% if messages %}
+                <div class="col-lg-10 messages-container">
+                    <ul class="messages">
+                        {% for message in messages %}
+                        {% if message.tages == success %}
+                        <div class="alert alert-{{message.tags}}" role="alert">
+                            {{ message }}
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+
+                {% block content %}
+                {% endblock %}
+            </div>
+            <!-- End Page-content -->
+
+            {% include 'includes/footer.html' %}
+        </div>
+        <!-- end main content-->
+    </div>
+    <!-- END layout-wrapper -->
+    <!-- JAVASCRIPT -->
+    <!-- Jquery -->
+    <!-- JAVASCRIPT -->
+    <input type="text" id="csrf_token" value="{{csrf_token }}" hidden />
+    <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/feather.min.js' %}"></script>
+    <script>feather.replace();</script>
+    <script src="{% static 'js/plotly-2.16.1.min.js' %}"></script>
+    {% block scripts %} {% endblock scripts %}
+
+</body>
+
+</html>

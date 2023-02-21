@@ -1,0 +1,107 @@
+<!-- templates/restroom/dashboards/iaq_dashbaord.html -->
+{% extends '../../base.html' %}
+{% block title %} Dashboard {% endblock title %}
+{% block content %}{% load split %}
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-6">
+            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                <h4 class="mb-sm-0">IAQ Dashboard</h4>
+            </div>
+        </div>
+        
+    </div>
+    <!-- end page title -->
+
+    <div class="row project-wrapper">
+        {% include 'includes/iaq_container.html' %}
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                <h4 class="mb-sm-0">Footfall Dashboard</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="row project-wrapper">
+        {% include 'includes/ff_container.html' %}
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div id='myLineChart'><!-- Plotly chart will be drawn inside this DIV --></div>
+        </div>
+    </div>
+    <!-- end row -->
+</div>
+<!-- end row -->
+</div>
+<!-- container-fluid -->
+{% endblock %}
+{% block scripts %}
+
+<script>
+    // Linechart
+let x = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
+
+let linechartData = []
+
+// {
+//         y: [],
+//         mode: 'lines+markers',
+//         name: 'Scatter + Lines',
+//         hoverongaps: false,
+//         colorscale: 'burgyl'
+// };
+
+let LineChartLayout = {
+  title:'Footfall Monthly Line Chart',
+    xaxis: {
+        title: 'Date',
+        titlefont: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#7f7f7f',
+        tickmode: 'linear'
+        }
+    },
+    yaxis: {
+        title: 'Footfall',
+        titlefont: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#7f7f7f'
+        }
+    }
+};
+
+$.ajax({
+    type: "GET",
+    url: "/linechart_all/",
+    success: function (res) {
+        // Loop through response object
+        
+        for(const [key, value] of Object.entries(res)){
+            
+            linechartData.push({
+                x: x,
+                y: value,
+                mode: 'lines+markers',
+                name: key,
+                hoverongaps: false,
+                colorscale: 'burgyl'
+            });
+
+        }   
+        Plotly.newPlot('myLineChart', linechartData, LineChartLayout);
+    }
+});
+
+
+
+</script>
+
+{% endblock %}

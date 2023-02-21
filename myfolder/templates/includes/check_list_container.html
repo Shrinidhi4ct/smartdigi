@@ -1,0 +1,46 @@
+
+        <div class="col-xl-6">
+            <div class="card">
+                <div class="card-header align-items-center d-flex">
+                    <h4 class="card-title mb-0 flex-grow-1">Check List</h4>
+                </div>
+                <div class="card-body">
+                   <div class="live-preview">
+                        <div class="table-responsive">
+                            <table class="table align-middle table-nowrap mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th scope="col">CheckList</th>
+                                        <th scope="col">Room</th>
+                                        <th scope="col">Created_by</th>
+                                        <th scope="col">Create at</th>
+                                        <!-- <th scope="col">Action</th> -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% if check_list %}
+                                    {% for c in check_list %}
+                                    <tr>
+                                        <td> {% for r in c.checklist %}
+                                            {{ r }}<br/>
+                                        {% endfor %}</td>
+                                        <td>{{ c.room }}</td>
+                                        <td>{{ c.created_by }}</td>
+                                        <td>{{ c.created_at }}</td>
+                                    </tr>
+                                            
+                                    {% endfor %}
+                                    {% else %}
+                                    <tr>
+                                        <td colspan="5">No Checklist created today!</td>
+                                    </tr>
+                                    {% endif %}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div><!-- end card-body -->
+            </div><!-- end card -->
+        </div><!-- end col -->

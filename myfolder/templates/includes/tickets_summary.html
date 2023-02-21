@@ -1,0 +1,103 @@
+<div class="col-xxl-8">
+    <div class="row">
+        <!-- end col -->
+        <div class="col-xl-3">
+            <div class="card card-animate">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="avatar-sm flex-shrink-0">
+                            <span class="avatar-title bg-soft-primary text-primary rounded-2 fs-2">
+                                <i data-feather="bell" class="text-primary"></i>
+                            </span>
+                        </div>
+                        <div class="flex-grow-1 overflow-hidden ms-3">
+                            <p class="text-uppercase fw-medium text-muted text-truncate mb-3">
+                                Tickets</p>
+                            <div class="d-flex align-items-center mb-3">
+                                <h4 class="fs-4 flex-grow-1 mb-0">
+                                    <span class="counter-value">{{ ticket_count_week }}</span>
+                                </h4>
+                            </div>
+                            <p class="text-muted text-truncate mb-0">This Week</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- end card body -->
+            </div>
+        </div>
+        <!-- end col -->
+        <div class="col-xl-3">
+            <div class="card card-animate">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="avatar-sm flex-shrink-0">
+                            <span class="avatar-title bg-soft-info text-info rounded-2 fs-2">
+                                <i data-feather="book" class="text-info"></i>
+                            </span>
+                        </div>
+                        <div class="flex-grow-1 overflow-hidden ms-3">
+                            <p class="text-uppercase fw-medium text-muted text-truncate mb-3">
+                                Tickets</p>
+                            <div class="d-flex align-items-center mb-3">
+                                <h4 class="fs-4 flex-grow-1 mb-0">
+                                    <span class="counter-value">{{ticket_count_day}}</span>
+                                </h4>
+                            </div>
+                            <p class="text-muted text-truncate mb-0">Today</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- end card body -->
+            </div>
+        </div>
+        <!-- end col -->
+
+        <div class="col-xl-3">
+            <div class="card card-animate">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="avatar-sm flex-shrink-0">
+                            <span class="avatar-title bg-soft-info text-info rounded-2 fs-2">
+                                <i data-feather="book" class="text-info"></i>
+                            </span>
+                        </div>
+                        <div class="flex-grow-1 overflow-hidden ms-3">
+                            <p class="text-uppercase fw-medium text-muted text-truncate mb-3">
+                                Resolved Tickets</p>
+                            <div class="d-flex align-items-center mb-3">
+                                <h4 class="fs-4 flex-grow-1 mb-0">
+                                    <span class="counter-value">{{ticket_resolved_count_month}}</span>
+                                </h4>
+                            </div>
+                            <p class="text-muted text-truncate mb-0">From the beginning</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- end card body -->
+            </div>
+        </div>
+
+        <div class="col-xl-3">
+            <div class="card card-animate">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="avatar-sm flex-shrink-0">
+                            <span class="avatar-title bg-soft-warning text-warning rounded-2 fs-2">
+                                <i data-feather="thumbs-up" class="text-warning"></i>
+                            </span>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <p class="text-uppercase fw-medium text-muted mb-3">Positive Feedback</p>
+                            <div class="d-flex align-items-center mb-3">
+                                <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value">{{positive_count}}</span></h4>
+                            </div>
+                            <p class="text-muted mb-0">From the beginning</p>
+                        </div>
+                    </div>
+                </div>
+             
+            </div>
+        </div>
+    </div>
+    <!-- end row -->
+</div>
